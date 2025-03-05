@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TITAN-Guide Taming Inference-Time AligNment for Guided Text-to-Video Diffusion Models</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="helper.js" defer></script> -->
+    <style>
+      td {
+        vertical-align: middle;
+      }
+      audio {
+        width: 20vw;
+        min-width: 100px;
+        max-width: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded"> -->
+      <div class="container pt-50 mt-5 shadow p-5 mb-5 bg-white rounded">
+      <div class="text-center">
+        <h1>TITAN-Guide</h1><h3> Taming Inference-Time AligNment for Guided Text-to-Video Diffusion Models</h3>
+        <p class="lead fw-bold">
+          |<a
+            href=""
+            class="btn border-white bg-white fw-bold"
+            >paper</a
+          >|<a
+          href=""
+          class="btn border-white bg-white fw-bold"
+          >code coming soon</a
+          >|
+        </p>
+        <p class="fst-italic mb-0">
+          <span class="author-block">
+            Anonymous 
+          </span>
+        </p>
+        <p><b></b></p>
+      </div>
+      <div class="container">
+        <!-- <h2 id="model-overview" style="text-align: center;">TITAN-Guide</h2> -->
+        <body>
+        <p style="text-align: center;">
+            <img src="teaser.png" height="200" width="800" class="img-fluid">
+        </p>
+        </body>
+            <p>
+                
+            </p>
+    </div>
+      <p>
+        <b>Abstract.</b>  
+        In the recent development of conditional diffusion models still require heavy supervised fine-tuning for performing control on a category of tasks. Training-free conditioning via guidance with off-the-shelf models is a favorable alternative to avoid further fine-tuning on the base model. However, the existing training-free guidance frameworks either heavy memory requirements or sub-optimal control due to rough estimation. These shortcomings limit the applicability to control diffusion models that require intense computation, such as Text-to-Video (T2V) diffusion models.
+        In this work, we propose Taming Inference Time Alignment for Guided Text-to-Video Diffusion Model, so-called TITAN-Guide, which overcomes memory space issues, and provides more optimal control in the guidance process compared to the counterparts. In particular, we develop an efficient method for optimizing diffusion latents without backpropagation from a discriminative guiding model. In particular, we study forward gradient descents for guided diffusion tasks with various options on directional directives. In our experiments, we demonstrate the effectiveness of our approach in efficiently managing memory during latent optimization, while previous methods fall short. Our proposed approach does not only minimize memory requirements but also improve T2V performance on various diffusion guidance benchmarks.
+      </p>
+    </div>
+
+
+
+<!-- <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+    <h2 id="model-overview" style="text-align: left;">Table of Contents</h2>
+    <body>
+    <p style="text-align: left;">
+    <ul style="list-style: outside none none !important;">
+       <li><a href="#sota" class="btn border-white bg-white fw-bold">T2V</a></li>
+        <li><a href="#variablelength" class="btn border-white bg-white fw-bold">Variable-length audio generation</a></li> -->
+       <!-- <li><a href="#prompting" class="btn border-white bg-white fw-bold">Precise Temporal Control</a></li>
+       <li><a href="#dual_comparison" class="btn border-white bg-white fw-bold">Comparison between dual text encoders and only structured text encoder</a></li>
+       <li><a href="#impact" class="btn border-white bg-white fw-bold">Broader Impact</a></li> -->
+    <!-- </ul>
+    </p>
+    </body>
+</div> -->
+
+
+    <div class="container shadow p-50 mb-5 bg-white rounded">
+      <h3>Text-to-Video Generation - Audio-Video Alignment Task<a id="sota"/></h3>
+      <!-- <p class="mb-0">
+         384x384 video resolution.
+      </p> -->
+      <div class="container pt-3 table-responsive">
+        <table
+          class="table table-hover"
+          id="supervision-efficiency-table">
+          <thead>
+            <tr>
+              <!-- <th style="text-align: center" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInput&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th> -->
+              <!-- <th style="text-align: center">Ground-truth</th> -->
+              <th style="text-align: center">TITAN-Guide (ours) - 384x384 Video Resolution  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <!-- <td><font size="-1">Chicken</font></td>  -->
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\f9YS8WU4o-k_000071_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\_mS-ngPLyA_000015_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\8W6XW76Ga34_000020_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\_sOBR_oTeU_000072_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\4xlmurmzYA_000030_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+            <tr>
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\__41ooMH-pk_000103_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\AVJU_DQFIo_000010_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\1shzZMN-cNg_000030_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\_4r0yXFki-8_000007_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\rRPpAZYWqLc_000113_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+      <div class="container shadow p-50 mb-5 bg-white rounded">
+        <h3>Audio-Video Alignment Task<a id="sota"/></h3>
+        <p class="mb-0">
+          Comparison with baselines. 
+        </p>
+        <div class="container pt-3 table-responsive">
+          <table
+            class="table table-hover"
+            id="supervision-efficiency-table">
+            <thead>
+              <tr>
+                <!-- <th style="text-align: center" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInput&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th> -->
+                <!-- <th style="text-align: center">Ground-truth</th> -->
+                <!-- <th style="text-align: center">Audio-to-Video Alignment Task</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr> 
+                <th style="text-align: center"><font size="-1">TITAN-Guide (Ours)</font></th> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\_xhwRJlAdtc_000010_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\1b2vXCYYYbs_000101_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\3ZQ3EkFS3hY_000104_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\9Vu4vPWZYJo_000030_withsound.mp4'>Your browser does not support the audio element.</video></td> 
+                <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\4xlmurmzYA_000030_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+              </tr>
+              <tr>
+                <th style="text-align: center"><font size="-1">Seeing and Hearing</font></th> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\_xhwRJlAdtc_000010_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\1b2vXCYYYbs_000101_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\3ZQ3EkFS3hY_000104_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\9Vu4vPWZYJo_000030_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\rRPpAZYWqLc_000113_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+        <div class="container shadow p-50 mb-5 bg-white rounded">
+          <h3>Aesthetic Task<a id="sota"/></h3>
+          <p class="mb-0">
+            Comparison with baselines. 
+          </p>
+          <div class="container pt-3 table-responsive">
+            <table
+              class="table table-hover"
+              id="supervision-efficiency-table">
+              <thead>
+                <tr>
+                  <!-- <th style="text-align: center" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInput&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th> -->
+                  <!-- <th style="text-align: center">Ground-truth</th> -->
+                  <!-- <th style="text-align: center">Audio-to-Video Alignment Task</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr> 
+                  <th style="text-align: center"><font size="-1">TITAN-Guide (Ours)</font></th> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_ours.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_ours.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_ours.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_ours.mp4'>Your browser does not support the audio element.</video></td> 
+                  <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\4xlmurmzYA_000030_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+                </tr>
+                <tr>
+                  <th style="text-align: center"><font size="-1">FreeDoM</font></th> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+                </tr>
+                <tr>
+                  <th style="text-align: center"><font size="-1">TFG</font></th>  
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_tfg.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_tfg.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_tfg.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_tfg.mp4'>Your browser does not support the audio element.</video></td> 
+                  <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\_xhwRJlAdtc_000010_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\1b2vXCYYYbs_000101_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\3ZQ3EkFS3hY_000104_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\9Vu4vPWZYJo_000030_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+                  <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\rRPpAZYWqLc_000113_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+                </tr>
+                <tr>
+                  <th style="text-align: center"><font size="-1">MPGD</font></th>  
+                  <!-- <td><font size="-1">MPGD</font></td>  -->
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+                  <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\a_baby penguin_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+
+    <div class="container shadow p-50 mb-5 bg-white rounded">
+      <h3>Style Transfer Task<a id="sota"/></h3>
+      <p class="mb-0">
+        Comparison with baselines. 
+      </p>
+      <div class="container pt-3 table-responsive">
+        <table
+          class="table table-hover"
+          id="supervision-efficiency-table">
+          <thead>
+            <tr>
+              <!-- <th style="text-align: center" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInput&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th> -->
+              <!-- <th style="text-align: center">Ground-truth</th> -->
+              <!-- <th style="text-align: center">Audio-to-Video Alignment Task</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <th style="text-align: center"><font size="-1">TITAN-Guide (Ours)</font></th> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_ours_interpolate.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a bird is chirping_oursgood2.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a bird is chirping_oursgood2.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a bird is chirping_oursgood2.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+            <tr>
+              <th style="text-align: center"><font size="-1">FreeDoM</font></th>  
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\animation_3_dogunderwater_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\animation_3_dogunderwater_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\animation_3_dogunderwater_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\animation_3_dogunderwater_freedom.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+            <tr>
+              <th style="text-align: center"><font size="-1">TFG</font></th>  
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_TFG.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_TFG.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_TFG.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_TFG.mp4'>Your browser does not support the audio element.</video></td> 
+              <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\_xhwRJlAdtc_000010_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\1b2vXCYYYbs_000101_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\3ZQ3EkFS3hY_000104_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\9Vu4vPWZYJo_000030_seeandhear_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+              <!-- <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\256x256\rRPpAZYWqLc_000113_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  -->
+            </tr>
+            <tr>
+              <th style="text-align: center"><font size="-1">MPGD</font></th>  
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\a_dog_barking_in_underwater_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+  </body>
+</html>
