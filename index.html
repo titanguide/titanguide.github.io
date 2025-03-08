@@ -81,7 +81,7 @@
 
 
     <div class="container shadow p-50 mb-5 bg-white rounded">
-      <h3>Text-to-Video Generation - Audio-Video Alignment Task<a id="sota"/></h3>
+      <h3>Audio-Video Alignment Task<a id="sota"/></h3>
       <!-- <p class="mb-0">
          384x384 video resolution.
       </p> -->
@@ -93,7 +93,7 @@
             <tr>
               <!-- <th style="text-align: center" > &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspInput&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th> -->
               <!-- <th style="text-align: center">Ground-truth</th> -->
-              <th style="text-align: center">TITAN-Guide (ours) - 384x384 Video Resolution  </th>
+              <th style="text-align: center">TITAN-Guide (ours) - 384x384 video resolution  </th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +112,13 @@
               <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\4r0yXFki-8_000007_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
               <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\rRPpAZYWqLc_000113_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
             </tr>
+            <tr>
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\pJkWCKT2aw_000560_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\3w_TsOuufxI_000134_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\87yY60QgBY_000019_ours_sound.mp4'>Your browser does not support the audio element.</video></td> 
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\dPP5kITfvA8_000057_ours_sound.mp4'>Your browser does not support the audio element.</video></td>
+              <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\384x384_ours\3bC3I41ROVU_000014_ours_sound.mp4'>Your browser does not support the audio element.</video></td>  
+            </tr>
           </tbody>
         </table>
       </div>
@@ -120,7 +127,7 @@
       <div class="container shadow p-50 mb-5 bg-white rounded">
         <h3>Audio-Video Alignment Task<a id="sota"/></h3>
         <p class="mb-0">
-          Comparison with baselines. 
+          Comparison with baselines - 256x256 resolution. 
         </p>
         <div class="container pt-3 table-responsive">
           <table
@@ -155,9 +162,9 @@
         </div>
       </div>
         <div class="container shadow p-50 mb-5 bg-white rounded">
-          <h3>Aesthetic Task<a id="sota"/></h3>
+          <h3>Aesthetic Guidance Task<a id="sota"/></h3>
           <p class="mb-0">
-            Comparison with baselines. 
+            Comparison with baselines - 256x256 resolution. 
           </p>
           <div class="container pt-3 table-responsive">
             <table
@@ -206,15 +213,23 @@
                   <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\mpgd\a_boat_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
                   <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\aesthetic\mpgd\a_car_and_a_truck_on_the_road_next to_a_traffic light_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
                 </tr>
+                <tr>
+                  <th style="text-align: center"><font size="-1"> </font></th>
+                  <th style="text-align: center"><font size="-1">A baby penguin on ice</font></th>
+                  <th style="text-align: center"><font size="-1">A giraffe with a funny face</font></th>
+                  <th style="text-align: center"><font size="-1">A boat</font></th>
+                  <th style="text-align: center"><font size="-1">A car and a truck on the road next to a traffic light</font></th>
+                  <!-- <td><font size="-1">MPGD</font></td>  -->
+                </tr>
               </tbody>
             </table>
           </div>
     </div>
 
     <div class="container shadow p-50 mb-5 bg-white rounded">
-      <h3>Style Transfer Task<a id="sota"/></h3>
+      <h3>Style Guidance Task<a id="sota"/></h3>
       <p class="mb-0">
-        Comparison with baselines. 
+        Comparison with baselines - 256x256 resolution. 
       </p>
       <div class="container pt-3 table-responsive">
         <table
@@ -260,6 +275,14 @@
               <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\mpgd\a_boat_in_the _canals_of_venice_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
               <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\mpgd\a_girl_going_to_a_farm_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
               <td><video controls controlslist="nodownload" class="px-1"> <source src='compare_data\comparison\style_transfer\mpgd\A_bird_gives_an_apple_to_a_squirrel_mpgd.mp4'>Your browser does not support the audio element.</video></td> 
+            </tr>
+            <tr>
+              <th style="text-align: center"><font size="-1"><img src="compare_data\comparison\style_transfer\target1.png" height="450" width="450" class="img-fluid"> Target Style</font></th>
+              <th style="text-align: center"><font size="-1">A dog under water</font></th>
+              <th style="text-align: center"><font size="-1">A boat in the canals of Venice</font></th>
+              <th style="text-align: center"><font size="-1">A girl going to a farm</font></th>
+              <th style="text-align: center"><font size="-1">A bird gives an apple to a squirrel</font></th>
+              <!-- <td><font size="-1">MPGD</font></td>  -->
             </tr>
           </tbody>
         </table>
